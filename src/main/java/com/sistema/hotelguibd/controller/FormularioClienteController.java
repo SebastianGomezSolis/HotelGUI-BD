@@ -3,11 +3,10 @@ package com.sistema.hotelguibd.controller;
 import com.sistema.hotelguibd.logica.ClienteLogica;
 import com.sistema.hotelguibd.modelo.Cliente;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class FormularioClienteController {
@@ -16,11 +15,18 @@ public class FormularioClienteController {
     @FXML private TextField txtNombreCliente;
     @FXML private TextField txtPrimerApellidoCliente;
     @FXML private DatePicker dtpFechaNacimientoCliente;
+    @FXML private Button btnGuardarCliente;
+    @FXML private ProgressIndicator progress;
 
     private Cliente cliente;
 
     private final ClienteLogica clienteLogica = new ClienteLogica();
     private boolean modoEdicion = false;
+
+    private TableView<Cliente> tablaDestino;
+    public void setTablaDestino(TableView<Cliente> t) {
+        this.tablaDestino = t;
+    }
 
     public void setCliente(Cliente cliente, boolean editar) {
         //Si el cliente es nuevo, es decir, si venimos de un "Agregar Cliente"
@@ -60,25 +66,69 @@ public class FormularioClienteController {
             if (!modoEdicion) {
                 //Entonces es un cliente nuevo
                 cliente = new Cliente(0, nombre, primerApellido, identificacion, fechaNacimiento);
-                clienteLogica.create(cliente);
             } else {
                 //Entonces estamos modificando un cliente existente
                 cliente.setIdentificacion(identificacion);
                 cliente.setNombre(nombre);
                 cliente.setPrimerApellido(primerApellido);
                 cliente.setFechaNacimiento(fechaNacimiento);
-                clienteLogica.update(cliente);
             }
 
-            //Aquí vamos a controlar el movimiento de las ventanas
-            //Se debe cerrar la ventana del formulario y se debe regresar a la principal
-            Stage stage = (Stage) txtNombreCliente.getScene().getWindow();
-            stage.setUserData(cliente);
-            stage.close();
+            // Aquí vamos a controlar el movimiento de las ventanas
+            // Se debe cerrar la ventana del formulario y se debe regresar a la principal
+            // Stage stage = (Stage) txtNombreCliente.getScene().getWindow();
+            // stage.setUserData(cliente);
+            // stage.close();
+            guardarClienteAsync(cliente, tablaDestino);
         }
         catch (Exception error) {
             mostrarAlerta("Error al guardar los datos", error.getMessage());
         }
+    }
+
+    public void guardarClienteAsync(Cliente c, TableView<Cliente> tablaClientes) {
+        btnGuardarCliente.setDisable(true);
+        progress.setVisible(true);
+
+        Async.run(
+                () -> {
+                    try {
+                        if (modoEdicion) {
+                            clienteLogica.update(c);   // <- implementa este método si no existe
+                            return c;
+                        } else {
+                            int nuevoId = clienteLogica.create(c).getId(); // o create(...) que devuelva Cliente
+                            c.setId(nuevoId);
+                            return c;
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                guardado -> {
+                    progress.setVisible(false);
+                    btnGuardarCliente.setDisable(false);
+
+                    if (tablaClientes != null) {
+                        if (modoEdicion) {
+                            tablaClientes.refresh();
+                        } else {
+                            tablaClientes.getItems().add(guardado);
+                        }
+                    }
+
+                    new Alert(Alert.AlertType.INFORMATION,
+                            (modoEdicion ? "Cliente actualizado (ID: " : "Cliente guardado (ID: ")
+                                    + guardado.getId() + ")").showAndWait();
+
+                    ((Stage) btnGuardarCliente.getScene().getWindow()).close();
+                },
+                ex -> {
+                    progress.setVisible(false);
+                    btnGuardarCliente.setDisable(false);
+                    new Alert(Alert.AlertType.ERROR, "No se pudo guardar: " + ex.getMessage()).showAndWait();
+                }
+        );
     }
 
     @FXML

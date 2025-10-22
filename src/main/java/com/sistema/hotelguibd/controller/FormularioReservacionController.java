@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class FormularioReservacionController {
     @FXML private DatePicker dtpFechaReservacion;
     @FXML private DatePicker dtpFechaLlegada;
     @FXML private TextField txtCantidadNochesReservacion;
+    @FXML private Button btnGuardarReservacion;
+    @FXML private ProgressIndicator progress;
 
     // Estado
     private Reservacion reservacion;
@@ -32,6 +35,9 @@ public class FormularioReservacionController {
     private final ClienteLogica clienteLogica = new ClienteLogica();
     private final HabitacionLogica habitacionLogica = new HabitacionLogica();
     private final ReservacionLogica reservacionLogica = new ReservacionLogica();
+
+    private TableView<Reservacion> tablaDestino;
+    public void setTablaDestino(TableView<Reservacion> t) { this.tablaDestino = t; }
 
     public void setReservacion(Reservacion reservacion, boolean editar) {
         this.reservacion = reservacion;
@@ -96,25 +102,68 @@ public class FormularioReservacionController {
 
             if (!modoEdicion) {
                 reservacion = new Reservacion(0, hab, cli, fRes, fLle, noches);
-                reservacion.setDescuento(0); // si manejas descuento, cámbialo aquí
-                reservacionLogica.create(reservacion);
             } else {
                 reservacion.setHabitacion(hab);
                 reservacion.setCliente(cli);
                 reservacion.setFechaReservacion(fRes);
                 reservacion.setFechaLlegada(fLle);
                 reservacion.setCantidadNoches(noches);
-                reservacionLogica.update(reservacion);
             }
 
-            Stage stage = (Stage) dtpFechaReservacion.getScene().getWindow();
-            stage.setUserData(reservacion);
-            stage.close();
+            // Stage stage = (Stage) dtpFechaReservacion.getScene().getWindow();
+            // stage.setUserData(reservacion);
+            // stage.close();
+            guardarReservacionAsync(reservacion, tablaDestino);
         } catch (NumberFormatException nfe) {
             mostrarAlerta("Dato inválido", "La cantidad de noches debe ser un número entero.");
         } catch (Exception e) {
             mostrarAlerta("Error", "No se pudo guardar la reservación: " + e.getMessage());
         }
+    }
+
+    public void guardarReservacionAsync(Reservacion r, TableView<Reservacion> tablaReservaciones) {
+        btnGuardarReservacion.setDisable(true);
+        progress.setVisible(true);
+
+        Async.run(
+                () -> {
+                    try {
+                        if (modoEdicion) {
+                            reservacionLogica.update(r);   // <- implementa este método si no existe
+                            return r;
+                        } else {
+                            int nuevoId = reservacionLogica.create(r).getId(); // o create(...) que devuelva Cliente
+                            r.setId(nuevoId);
+                            return r;
+                        }
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+                guardado -> {
+                    progress.setVisible(false);
+                    btnGuardarReservacion.setDisable(false);
+
+                    if (tablaReservaciones != null) {
+                        if (modoEdicion) {
+                            tablaReservaciones.refresh();
+                        } else {
+                            tablaReservaciones.getItems().add(guardado);
+                        }
+                    }
+
+                    new Alert(Alert.AlertType.INFORMATION,
+                            (modoEdicion ? "Reservacion actualizada (ID: " : "Reservacion guardado (ID: ")
+                                    + guardado.getId() + ")").showAndWait();
+
+                    ((Stage) btnGuardarReservacion.getScene().getWindow()).close();
+                },
+                ex -> {
+                    progress.setVisible(false);
+                    btnGuardarReservacion.setDisable(false);
+                    new Alert(Alert.AlertType.ERROR, "No se pudo guardar: " + ex.getMessage()).showAndWait();
+                }
+        );
     }
 
     @FXML

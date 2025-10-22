@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -38,7 +39,7 @@
             <ComboBox fx:id="cmbCliente" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button id="btnGuardar" fx:id="btnGuardar" layoutX="508.0" layoutY="365.0" mnemonicParsing="false" onAction="#guardarReservacion" text="Guardar" textFill="#11461e" />
+      <Button id="btnGuardar" fx:id="btnGuardarReservacion" layoutX="508.0" layoutY="365.0" mnemonicParsing="false" onAction="#guardarReservacion" text="Guardar" textFill="#11461e" />
       <Label layoutX="240.0" layoutY="43.0" text="Registro de Reservavion">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -46,5 +47,6 @@
       </Label>
       <Button id="btnRegresar" layoutX="573.0" layoutY="365.0" mnemonicParsing="false" onAction="#cancelarReservacion" text="Cancelar" textFill="#721515" />
       <Label layoutX="59.0" layoutY="70.0" text="Ingrese lo datos en las casillas para poder crear y guardar la reservacion. No deje ninguno en blanco." />
+      <ProgressIndicator fx:id="progress" layoutX="473.0" layoutY="365.0" prefHeight="25.0" prefWidth="26.0" visible="false" />
    </children>
 </Pane>

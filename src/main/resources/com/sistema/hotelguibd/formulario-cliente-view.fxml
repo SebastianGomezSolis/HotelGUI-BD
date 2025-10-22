@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -39,8 +40,9 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Button id="btnGuardar" fx:id="btnGuardar" layoutX="500.0" layoutY="361.0" mnemonicParsing="false" onAction="#guardarCliente" text="Guardar" textFill="#193b12" />
+      <Button id="btnGuardar" fx:id="btnGuardarCliente" layoutX="500.0" layoutY="361.0" mnemonicParsing="false" onAction="#guardarCliente" text="Guardar" textFill="#193b12" />
       <Button id="btnRegresar" layoutX="574.0" layoutY="361.0" mnemonicParsing="false" onAction="#cancelarCliente" text="Cancelar" textFill="#5b1919" />
       <Label layoutX="72.0" layoutY="70.0" text="Ingrese lo datos en las casillas para poder crear y guardar al cliente. No deje ninguno en blanco." />
+      <ProgressIndicator fx:id="progress" layoutX="471.0" layoutY="361.0" prefHeight="25.0" prefWidth="20.0" visible="false" />
    </children>
 </Pane>
