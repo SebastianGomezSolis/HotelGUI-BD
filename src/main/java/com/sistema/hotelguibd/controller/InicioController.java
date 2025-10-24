@@ -495,6 +495,23 @@ public class InicioController implements Initializable {
         );
     }
 
+    @FXML
+    public void abrirChat() {
+        try {
+            var loader = new javafx.fxml.FXMLLoader(getClass().getResource("/com/sistema/hotelguibd/chat.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Chat");
+            stage.setScene(new Scene(root));
+            stage.initOwner(progressCliente.getScene().getWindow());
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Aqui podriamos poner un alert con un mensaje bonito :)
+        }
+    }
+
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
