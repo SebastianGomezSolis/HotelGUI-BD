@@ -5,44 +5,98 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.FormularioClienteController">
-   <children>
-      <GridPane layoutX="98.0" layoutY="108.0" prefHeight="240.0" prefWidth="455.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="62.800024414062506" minHeight="10.0" prefHeight="56.9999755859375" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="138.40000000000003" minHeight="10.0" prefHeight="55.599993896484385" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="62.00000610351563" minHeight="10.0" prefHeight="62.00000610351563" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="57.999975585937506" minHeight="10.0" prefHeight="57.999975585937506" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label id="lblNumeroIdentificacion" prefHeight="24.0" prefWidth="144.0" text="Numero de identificacion" GridPane.rowIndex="2" />
-            <Label id="lblNombre" text="Nombre" />
-            <Label id="lblFechaNacimiento" text="Fecha de Nacimiento" GridPane.rowIndex="3" />
-            <DatePicker id="dtpFechaNacimiento" fx:id="dtpFechaNacimientoCliente" prefHeight="25.0" prefWidth="189.0" promptText="Fecha de Nacimiento" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtNombreCliente" promptText="Nombre" GridPane.columnIndex="1" />
-            <TextField fx:id="txtPrimerApellidoCliente" promptText="Primer Apellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label id="lblPrimerApellido" text="Primer Apellido" GridPane.rowIndex="1" />
-            <TextField fx:id="txtIdentificacionCliente" promptText="Identificacion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         </children>
-      </GridPane>
-      <Label layoutX="255.0" layoutY="35.0" text="Registro de Clientes">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Button id="btnGuardar" fx:id="btnGuardarCliente" layoutX="500.0" layoutY="361.0" mnemonicParsing="false" onAction="#guardarCliente" text="Guardar" textFill="#193b12" />
-      <Button id="btnRegresar" layoutX="574.0" layoutY="361.0" mnemonicParsing="false" onAction="#cancelarCliente" text="Cancelar" textFill="#5b1919" />
-      <Label layoutX="72.0" layoutY="70.0" text="Ingrese lo datos en las casillas para poder crear y guardar al cliente. No deje ninguno en blanco." />
-      <ProgressIndicator fx:id="progress" layoutX="471.0" layoutY="361.0" prefHeight="25.0" prefWidth="20.0" visible="false" />
-   </children>
-</Pane>
+<AnchorPane prefHeight="550.0" prefWidth="775.0" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.FormularioClienteController">
+    <children>
+        <!-- Panel principal con glassmorphism -->
+        <AnchorPane layoutX="24.0" layoutY="20.0" prefHeight="508.0" prefWidth="720.0" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-background-radius: 20; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-width: 1; -fx-border-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.3, 0, 10);">
+            <children>
+                <!-- Título -->
+                <Label layoutX="276.0" layoutY="14.0" text="Registro de Clientes" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+
+                <!-- Subtítulo -->
+                <Label layoutX="208.0" layoutY="49.0" prefHeight="16.0" prefWidth="305.0" text="Ingrese los datos en las casillas para crear y guardar al cliente." textAlignment="CENTER" textFill="rgba(255, 255, 255, 0.9)" wrapText="true">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </Label>
+
+                <!-- Formulario -->
+                <VBox layoutX="132.0" layoutY="87.0" prefHeight="346.0" prefWidth="458.0" spacing="12">
+                    <children>
+                        <!-- Campo Nombre -->
+                        <VBox prefHeight="70.0" prefWidth="458.0" spacing="5">
+                            <children>
+                                <Label id="lblNombre" text="Nombre" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtNombreCliente" prefHeight="32.0" prefWidth="404.0" promptText="Ingrese el nombre" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8; -fx-padding: 0 12 0 12; -fx-font-size: 12;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Campo Primer Apellido -->
+                        <VBox prefHeight="70.0" prefWidth="458.0" spacing="5">
+                            <children>
+                                <Label id="lblPrimerApellido" text="Primer Apellido" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtPrimerApellidoCliente" prefHeight="32.0" prefWidth="404.0" promptText="Ingrese el primer apellido" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8; -fx-padding: 0 12 0 12; -fx-font-size: 12;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Campo Número de Identificación -->
+                        <VBox prefHeight="66.0" prefWidth="458.0" spacing="5">
+                            <children>
+                                <Label id="lblNumeroIdentificacion" text="Número de Identificación" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtIdentificacionCliente" prefHeight="32.0" prefWidth="404.0" promptText="Ingrese la identificación" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8; -fx-padding: 0 12 0 12; -fx-font-size: 12;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Campo Fecha de Nacimiento -->
+                        <VBox prefHeight="64.0" prefWidth="458.0" spacing="5">
+                            <children>
+                                <Label id="lblFechaNacimiento" text="Fecha de Nacimiento" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <DatePicker id="dtpFechaNacimiento" fx:id="dtpFechaNacimientoCliente" prefHeight="32.0" prefWidth="459.0" promptText="Seleccione fecha de nacimiento" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8;" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- Botones -->
+                <Button id="btnGuardar" fx:id="btnGuardarCliente" layoutX="226.0" layoutY="440.0" mnemonicParsing="false" onAction="#guardarCliente" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-background-radius: 18; -fx-cursor: hand; -fx-font-weight: bold;" text="Guardar">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+                <Button id="btnRegresar" layoutX="395.0" layoutY="440.0" mnemonicParsing="false" onAction="#cancelarCliente" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 18; -fx-cursor: hand; -fx-font-weight: bold;" text="Cancelar">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+                <!-- Progress Indicator -->
+                <ProgressIndicator fx:id="progress" layoutX="148.0" layoutY="310.0" prefHeight="25.0" prefWidth="25.0" style="-fx-progress-color: white;" visible="false" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

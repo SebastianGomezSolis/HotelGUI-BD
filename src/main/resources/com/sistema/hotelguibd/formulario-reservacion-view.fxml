@@ -6,47 +6,110 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.FormularioReservacionController">
-   <children>
-      <GridPane layoutX="79.0" layoutY="103.0" prefHeight="240.0" prefWidth="492.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label id="lblNumeroHabitacion" text="Habitacion" />
-            <Label id="lblIdentificacionCliente" text="Cliente" GridPane.rowIndex="1" />
-            <Label id="lblFechaReservacion" text="Fecha de reservacion" GridPane.rowIndex="2" />
-            <Label id="lblFechaLlegada" text="Fecha de llegada" GridPane.rowIndex="3" />
-            <Label id="lblCantidadNoches" text="Cantidad de Noches" GridPane.rowIndex="4" />
-            <DatePicker fx:id="dtpFechaReservacion" promptText="Fecha Reservacion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <DatePicker fx:id="dtpFechaLlegada" promptText="Fecha Llegada" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtCantidadNochesReservacion" promptText="Cantidad Noches" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <ComboBox fx:id="cmbHabitacion" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" />
-            <ComboBox fx:id="cmbCliente" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <Button id="btnGuardar" fx:id="btnGuardarReservacion" layoutX="508.0" layoutY="365.0" mnemonicParsing="false" onAction="#guardarReservacion" text="Guardar" textFill="#11461e" />
-      <Label layoutX="240.0" layoutY="43.0" text="Registro de Reservavion">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Button id="btnRegresar" layoutX="573.0" layoutY="365.0" mnemonicParsing="false" onAction="#cancelarReservacion" text="Cancelar" textFill="#721515" />
-      <Label layoutX="59.0" layoutY="70.0" text="Ingrese lo datos en las casillas para poder crear y guardar la reservacion. No deje ninguno en blanco." />
-      <ProgressIndicator fx:id="progress" layoutX="473.0" layoutY="365.0" prefHeight="25.0" prefWidth="26.0" visible="false" />
-   </children>
-</Pane>
+<AnchorPane prefHeight="550.0" prefWidth="775.0" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.FormularioReservacionController">
+    <children>
+        <!-- Panel principal con glassmorphism -->
+        <AnchorPane layoutX="33.0" layoutY="20.0" prefHeight="512.0" prefWidth="713.0" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-background-radius: 20; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-width: 1; -fx-border-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.3, 0, 10);">
+            <children>
+                <!-- Título -->
+                <Label layoutX="253.0" layoutY="14.0" text="Registro de Reservación" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+
+                <!-- Subtítulo -->
+                <Label layoutX="175.0" layoutY="41.0" prefWidth="360.0" text="Ingrese los datos en las casillas para crear y guardar la reservación." textAlignment="CENTER" textFill="rgba(255, 255, 255, 0.9)" wrapText="true">
+                    <font>
+                        <Font size="11.0" />
+                    </font>
+                </Label>
+
+                <!-- Formulario -->
+                <VBox layoutX="150.0" layoutY="93.0" prefHeight="326.0" prefWidth="413.0" spacing="12">
+                    <children>
+                        <!-- Campo Habitación -->
+                        <VBox prefHeight="66.0" prefWidth="400.0" spacing="5">
+                            <children>
+                                <Label id="lblNumeroHabitacion" text="Habitación" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="cmbHabitacion" prefHeight="35.0" prefWidth="421.0" promptText="Seleccione una habitación" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8; -fx-padding: 0 10 0 10; -fx-font-size: 12;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Campo Cliente -->
+                        <VBox prefHeight="66.0" prefWidth="413.0" spacing="5">
+                            <children>
+                                <Label id="lblIdentificacionCliente" text="Cliente" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <ComboBox fx:id="cmbCliente" prefHeight="32.0" prefWidth="417.0" promptText="Seleccione un cliente" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8; -fx-padding: 0 10 0 10; -fx-font-size: 12;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Campo Fecha de Reservación -->
+                        <VBox prefHeight="63.0" prefWidth="413.0" spacing="5">
+                            <children>
+                                <Label id="lblFechaReservacion" text="Fecha de Reservación" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <DatePicker fx:id="dtpFechaReservacion" prefHeight="32.0" prefWidth="418.0" promptText="Seleccione fecha de reservación" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Campo Fecha de Llegada -->
+                        <VBox prefHeight="61.0" prefWidth="413.0" spacing="5">
+                            <children>
+                                <Label id="lblFechaLlegada" text="Fecha de Llegada" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <DatePicker fx:id="dtpFechaLlegada" prefHeight="32.0" prefWidth="415.0" promptText="Seleccione fecha de llegada" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8;" />
+                            </children>
+                        </VBox>
+
+                        <!-- Campo Cantidad de Noches -->
+                        <VBox prefHeight="64.0" prefWidth="413.0" spacing="5">
+                            <children>
+                                <Label id="lblCantidadNoches" text="Cantidad de Noches" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="11.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtCantidadNochesReservacion" prefHeight="32.0" prefWidth="116.0" promptText="Ingrese cantidad de noches" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 8; -fx-padding: 0 12 0 12; -fx-font-size: 12;" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+
+                <!-- Botones -->
+                <Button id="btnGuardar" fx:id="btnGuardarReservacion" layoutX="223.0" layoutY="455.0" mnemonicParsing="false" onAction="#guardarReservacion" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-background-radius: 18; -fx-cursor: hand; -fx-font-weight: bold;" text="Guardar">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+                <Button id="btnRegresar" layoutX="392.0" layoutY="455.0" mnemonicParsing="false" onAction="#cancelarReservacion" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 18; -fx-cursor: hand; -fx-font-weight: bold;" text="Cancelar">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+
+                <!-- Progress Indicator -->
+                <ProgressIndicator fx:id="progress" layoutX="165.0" layoutY="340.0" prefHeight="25.0" prefWidth="25.0" style="-fx-progress-color: white;" visible="false" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

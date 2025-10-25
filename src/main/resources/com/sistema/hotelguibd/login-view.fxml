@@ -6,45 +6,85 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.LoginController">
-   <children>
-      <GridPane layoutX="144.0" layoutY="111.0" prefHeight="94.0" prefWidth="361.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.20001220703125" minWidth="10.0" prefWidth="115.99998779296875" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.60001220703128" minWidth="10.0" prefWidth="245.60001220703128" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label id="lblUsuario" text="Usuario:" />
-            <Label id="lblPassword" text="Contraseña:" GridPane.rowIndex="1" />
-            <TextField id="txtUsuario" fx:id="txtUsuario" prefHeight="26.0" prefWidth="209.0" GridPane.columnIndex="1" />
-            <PasswordField id="pwdPassword" fx:id="txtPassword" prefHeight="26.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <Label layoutX="266.0" layoutY="48.0" text="Inicio de Sesión">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="85.0" layoutY="73.0" prefHeight="26.0" prefWidth="480.0" text="¡Bienvenido al sistema administrativo del Hotel! Para continuar digite su usuario y contraseña." />
-      <Button id="btnIniciar" fx:id="btnIniciar" layoutX="414.0" layoutY="225.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar Sesión" textFill="#2a9632">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button id="btnSalir" layoutX="521.0" layoutY="225.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Salir" textFill="#894d4d">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <ProgressIndicator id="progress" fx:id="progress" layoutX="448.0" layoutY="224.0" prefHeight="26.0" prefWidth="25.0" visible="false" />
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.LoginController">
+    <children>
+        <!-- Panel central de login con efecto glassmorphism -->
+        <AnchorPane layoutX="220.0" layoutY="100.0" prefHeight="400.0" prefWidth="359.0" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-background-radius: 20; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-width: 1; -fx-border-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.3, 0, 10);">
+            <children>
+                <!-- Título principal -->
+                <Label layoutX="127.0" layoutY="22.0" text="Login" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Label>
+
+                <!-- Subtítulo de bienvenida -->
+                <Label layoutX="23.0" layoutY="76.0" prefHeight="58.0" prefWidth="303.0" text="¡Bienvenido al sistema administrativo del Hotel! Para continuar digite su usuario y contraseña." textAlignment="CENTER" textFill="rgba(255, 255, 255, 0.9)" wrapText="true">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
+
+                <!-- Campo Usuario -->
+                <VBox layoutX="40.0" layoutY="140.0" prefWidth="270.0" spacing="5">
+                    <children>
+                        <Label id="lblUsuario" text="Usuario:" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <TextField id="txtUsuario" fx:id="txtUsuario" prefHeight="40.0" promptText="Ingrese su usuario" style="-fx-background-color: rgba(255, 255, 255, 0.2); -fx-background-radius: 20; -fx-text-fill: white; -fx-prompt-text-fill: rgba(255, 255, 255, 0.6); -fx-border-color: rgba(255, 255, 255, 0.4); -fx-border-radius: 20; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 13;">
+                        </TextField>
+                    </children>
+                </VBox>
+
+                <!-- Campo Contraseña -->
+                <VBox layoutX="40.0" layoutY="215.0" prefWidth="270.0" spacing="5">
+                    <children>
+                        <Label id="lblPassword" text="Contraseña:" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                        <PasswordField id="pwdPassword" fx:id="txtPassword" prefHeight="40.0" promptText="Ingrese su contraseña" style="-fx-background-color: rgba(255, 255, 255, 0.2); -fx-background-radius: 20; -fx-text-fill: white; -fx-prompt-text-fill: rgba(255, 255, 255, 0.6); -fx-border-color: rgba(255, 255, 255, 0.4); -fx-border-radius: 20; -fx-border-width: 1; -fx-padding: 0 15 0 15; -fx-font-size: 13;">
+                        </PasswordField>
+                    </children>
+                </VBox>
+
+                <!-- Botón Iniciar Sesión -->
+                <Button id="btnIniciar" fx:id="btnIniciar" layoutX="40.0" layoutY="290.0" mnemonicParsing="false" onAction="#iniciarSesion" prefHeight="45.0" prefWidth="270.0" style="-fx-background-color: white; -fx-background-radius: 25; -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.3, 0, 5);" text="Iniciar Sesión">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+
+                <!-- Progress Indicator -->
+                <ProgressIndicator id="progress" fx:id="progress" layoutX="163.0" layoutY="300.0" prefHeight="30.0" prefWidth="30.0" style="-fx-progress-color: white;" visible="false" />
+
+                <!-- Botón Salir -->
+                <Button id="btnSalir" layoutX="130.0" layoutY="350.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: transparent; -fx-text-fill: rgba(255, 255, 255, 0.8); -fx-border-color: rgba(255, 255, 255, 0.5); -fx-border-radius: 15; -fx-background-radius: 15; -fx-cursor: hand;" text="Salir">
+                    <font>
+                        <Font name="System Bold" size="11.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+
+        <!-- Decoración: Elementos adicionales de diseño -->
+        <Label layoutX="40.0" layoutY="40.0" text="🏨" textFill="rgba(255, 255, 255, 0.3)">
+            <font>
+                <Font size="40.0" />
+            </font>
+        </Label>
+
+        <!-- Texto inferior -->
+        <Label layoutX="345.0" layoutY="40.0" text="Hotel Vista Hermosa" textFill="rgba(255, 255, 255, 0.7)">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+    </children>
 </AnchorPane>

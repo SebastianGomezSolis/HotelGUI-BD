@@ -9,91 +9,188 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="432.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.InicioController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.hotelguibd.controller.InicioController">
     <children>
-
-        <!-- Boton para abrir -->
-        <Button fx:id="btnAbrirChat" layoutX="14.0" layoutY="392.0" mnemonicParsing="flase" onAction="#abrirChat" text="Abrir Chat" AnchorPane.rightAnchor="515.6" AnchorPane.topAnchor="392.0" />
-        <TabPane id="tabPrincipal" fx:id="tabPrincipal" layoutX="14.0" layoutY="14.0" prefHeight="373.0" prefWidth="573.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Clientes">
-                    <content>
-                        <AnchorPane id="tabClientes" fx:id="tabClientes" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Pane layoutY="-2.0" prefHeight="348.0" prefWidth="573.0">
+        <!-- Panel principal con efecto glassmorphism -->
+        <AnchorPane layoutX="20.0" layoutY="20.0" prefHeight="560.0" prefWidth="860.0" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-background-radius: 20; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-width: 1; -fx-border-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 20, 0.3, 0, 10);">
+            <children>
+                <!-- TabPane estilizado -->
+                <TabPane id="tabPrincipal" fx:id="tabPrincipal" layoutX="15.0" layoutY="15.0" prefHeight="480.0" prefWidth="830.0" style="-fx-background-color: transparent; -fx-tab-min-height: 28px; -fx-tab-max-height: 28px; -fx-border-color: transparent;" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <!-- TAB CLIENTES -->
+                        <Tab style="-fx-background-color: #e0c3fc; -fx-background-radius: 12 12 0 0; -fx-padding: 5 12 5 12; -fx-font-size: 11px; -fx-font-weight: bold;" text="Clientes">
+                            <content>
+                                <AnchorPane id="tabClientes" fx:id="tabClientes" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 10;">
                                     <children>
-                                        <TableView id="tblClientes" fx:id="tblClientes" layoutX="14.0" layoutY="54.0" prefHeight="279.0" prefWidth="406.0">
-                                            <columns>
-                                                <TableColumn fx:id="colIdCliente" prefWidth="65.0" text="#" />
-                                                <TableColumn fx:id="colIdentificacionCliente" prefWidth="130.0" text="Identificación" />
-                                                <TableColumn fx:id="colNombreCliente" prefWidth="210.0" text="Nombre Completo" />
-                                            </columns>
-                                        </TableView>
-                                        <Button id="btnAgregarCliente" fx:id="btnAgregarCliente" layoutX="459.0" layoutY="143.0" mnemonicParsing="false" onAction="#agregarCliente" prefHeight="25.0" prefWidth="66.0" text="Agregar" />
-                                        <Button id="btnModificarCliente" fx:id="btnModificarCliente" layoutX="459.0" layoutY="181.0" mnemonicParsing="false" onAction="#modificarCliente" text="Modificar" />
-                                        <Button id="btnEliminarCliente" fx:id="btnEliminarCliente" layoutX="459.0" layoutY="220.0" mnemonicParsing="false" onAction="#eliminarCliente" prefHeight="25.0" prefWidth="66.0" text="Eliminar" />
-                                        <TextField id="txtBuscarCliente" fx:id="txtBuscarCliente" layoutX="14.0" layoutY="14.0" />
-                                        <Button id="btnBuscarCliente" fx:id="btnBuscarCliente" layoutX="172.0" layoutY="14.0" mnemonicParsing="false" onAction="#buscarCliente" text="Buscar" />
-                              <Button fx:id="btnEstadistica" layoutX="443.0" layoutY="256.0" mnemonicParsing="false" onAction="#abrirEstadisticas" text="Ver Estadísticas" />
-                              <ProgressIndicator fx:id="progressCliente" layoutY="1.0" prefHeight="17.0" prefWidth="16.0" visible="false" />
+                                        <Pane prefHeight="445.0" prefWidth="830.0">
+                                            <children>
+                                                <!-- Barra de búsqueda -->
+                                                <TextField id="txtBuscarCliente" fx:id="txtBuscarCliente" layoutX="20.0" layoutY="15.0" prefHeight="35.0" prefWidth="200.0" promptText="Buscar cliente..." style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 20; -fx-text-fill: #333; -fx-prompt-text-fill: #999; -fx-padding: 0 15 0 15; -fx-font-size: 13;" />
+
+                                                <Button id="btnBuscarCliente" fx:id="btnBuscarCliente" layoutX="235.0" layoutY="15.0" mnemonicParsing="false" onAction="#buscarCliente" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="Buscar">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <ProgressIndicator fx:id="progressCliente" layoutX="330.0" layoutY="20.0" prefHeight="25.0" prefWidth="25.0" style="-fx-progress-color: white;" visible="false" />
+
+                                                <!-- Tabla Clientes -->
+                                                <TableView id="tblClientes" fx:id="tblClientes" layoutX="20.0" layoutY="65.0" prefHeight="360.0" prefWidth="620.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: #e0c3fc; -fx-border-width: 2; -fx-effect: dropshadow(gaussian, rgba(102, 126, 234, 0.2), 10, 0.3, 0, 4); -fx-table-cell-border-color: transparent; -fx-control-inner-background: #fefefe; -fx-control-inner-background-alt: #f9f5ff;">
+                                                    <columns>
+                                                        <TableColumn fx:id="colIdCliente" prefWidth="80.0" style="-fx-alignment: CENTER;" text="#" />
+                                                        <TableColumn fx:id="colIdentificacionCliente" prefWidth="200.0" text="Identificación" />
+                                                        <TableColumn fx:id="colNombreCliente" prefWidth="340.0" text="Nombre Completo" />
+                                                    </columns>
+                                                </TableView>
+
+                                                <!-- Botones laterales -->
+                                                <Button id="btnAgregarCliente" fx:id="btnAgregarCliente" layoutX="660.0" layoutY="120.0" mnemonicParsing="false" onAction="#agregarCliente" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="+ Agregar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <Button id="btnModificarCliente" fx:id="btnModificarCliente" layoutX="660.0" layoutY="175.0" mnemonicParsing="false" onAction="#modificarCliente" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="✏ Modificar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <Button id="btnEliminarCliente" fx:id="btnEliminarCliente" layoutX="660.0" layoutY="230.0" mnemonicParsing="false" onAction="#eliminarCliente" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="🗑 Eliminar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <Button fx:id="btnEstadistica" layoutX="660.0" layoutY="285.0" mnemonicParsing="false" onAction="#abrirEstadisticas" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #8b5cf6; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="📊 Estadísticas">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </Pane>
                                     </children>
-                                </Pane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab id="tabHabitaciones" fx:id="tabHabitaciones" text="Habitaciones">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <Pane prefHeight="343.0" prefWidth="573.0">
-                           <children>
-                                      <Button id="btnAgregarHabitacion" fx:id="btnAgregarHabitacion" layoutX="459.0" layoutY="139.0" mnemonicParsing="false" onAction="#agregarHabitacion" prefHeight="25.0" prefWidth="66.0" text="Agregar" />
-                                      <Button id="btnModificarHabitacion" fx:id="btnModificarHabitacion" layoutX="459.0" layoutY="179.0" mnemonicParsing="false" onAction="#modificarHabitacion" text="Modificar" />
-                                      <Button id="btnEliminarHabitacion" fx:id="btnEliminarHabitacion" layoutX="459.0" layoutY="216.0" mnemonicParsing="false" onAction="#eliminarHabitacion" prefHeight="25.0" prefWidth="66.0" text="Eliminar" />
-                                      <TextField id="txtBuscarHabitacion" fx:id="txtBuscarHabitacion" layoutX="14.0" layoutY="12.0" />
-                           </children></Pane>
-                                <TableView id="tblHabitaciones" fx:id="tblHabitaciones" layoutX="15.0" layoutY="52.0" prefHeight="279.0" prefWidth="404.0">
-                                    <columns>
-                                        <TableColumn fx:id="colIdHabitacion" prefWidth="69.0" text="Id" />
-                                        <TableColumn fx:id="colNumeroHabitacion" prefWidth="184.0" text="#Habitacion" />
-                                        <TableColumn fx:id="colPrecioHabitacion" prefWidth="150.0" text="Precio" />
-                                    </columns>
-                                </TableView>
-                                <Button id="btnBuscarHabitacion" fx:id="btnBuscarHabitacion" layoutX="173.0" layoutY="12.0" mnemonicParsing="false" onAction="#buscarHabitacion" text="Buscar" />
-                        <ProgressIndicator fx:id="progressHabitaciones" prefHeight="17.0" prefWidth="16.0" visible="false" />
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-            <Tab id="tabHabitaciones" fx:id="tabReservaciones" text="Reservaciones">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Pane prefHeight="343.0" prefWidth="573.0">
-                           <children>
-                              <Button id="btnAgregarHabitacion" fx:id="btnAgregarHabitacion2" layoutX="461.0" layoutY="141.0" mnemonicParsing="false" onAction="#agregarReservacion" prefHeight="25.0" prefWidth="66.0" text="Agregar" />
-                              <Button id="btnModificarHabitacion" fx:id="btnModificarHabitacion2" layoutX="461.0" layoutY="181.0" mnemonicParsing="false" onAction="#modificarReservacion" text="Modificar" />
-                              <Button id="btnEliminarHabitacion" fx:id="btnEliminarHabitacion2" layoutX="461.0" layoutY="218.0" mnemonicParsing="false" onAction="#eliminarReservacion" prefHeight="25.0" prefWidth="66.0" text="Eliminar" />
-                           </children>
-                        </Pane>
-                        <TableView id="tblHabitaciones" fx:id="tblReservaciones" layoutX="15.0" layoutY="52.0" prefHeight="279.0" prefWidth="401.0">
-                           <columns>
-                              <TableColumn fx:id="colIdReservacion" prefWidth="63.0" text="#" />
-                              <TableColumn fx:id="colClienteReservacion" prefWidth="104.0" text="Cliente" />
-                              <TableColumn fx:id="colHabitacionReservacion" prefWidth="97.5999755859375" text="Habitacion" />
-                              <TableColumn fx:id="colNochesReservacion" prefWidth="136.00002441406252" text="#Noches" />
-                           </columns>
-                        </TableView>
-                        <TextField id="txtBuscarHabitacion" fx:id="txtBuscarReservacion" layoutX="15.0" layoutY="12.0" />
-                        <Button id="btnBuscarHabitacion" fx:id="btnBuscarReservacion" layoutX="173.0" layoutY="12.0" mnemonicParsing="false" onAction="#buscarReservacion" text="Buscar" />
-                        <ProgressIndicator fx:id="progressReservaciones" layoutX="1.0" prefHeight="17.0" prefWidth="16.0" visible="false" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            </tabs>
-        </TabPane>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+
+                        <!-- TAB HABITACIONES -->
+                        <Tab id="tabHabitaciones" fx:id="tabHabitaciones" style="-fx-background-color: #ffd1dc; -fx-background-radius: 12 12 0 0; -fx-padding: 5 12 5 12; -fx-font-size: 11px; -fx-font-weight: bold;" text="Habitaciones">
+                            <content>
+                                <AnchorPane style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 10;">
+                                    <children>
+                                        <Pane prefHeight="445.0" prefWidth="830.0">
+                                            <children>
+                                                <!-- Barra de búsqueda -->
+                                                <TextField id="txtBuscarHabitacion" fx:id="txtBuscarHabitacion" layoutX="20.0" layoutY="15.0" prefHeight="35.0" prefWidth="200.0" promptText="Buscar habitación..." style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 20; -fx-text-fill: #333; -fx-prompt-text-fill: #999; -fx-padding: 0 15 0 15; -fx-font-size: 13;" />
+
+                                                <Button id="btnBuscarHabitacion" fx:id="btnBuscarHabitacion" layoutX="235.0" layoutY="15.0" mnemonicParsing="false" onAction="#buscarHabitacion" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="Buscar">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <ProgressIndicator fx:id="progressHabitaciones" layoutX="330.0" layoutY="20.0" prefHeight="25.0" prefWidth="25.0" style="-fx-progress-color: white;" visible="false" />
+
+                                                <!-- Tabla Habitaciones -->
+                                                <TableView id="tblHabitaciones" fx:id="tblHabitaciones" layoutX="20.0" layoutY="65.0" prefHeight="360.0" prefWidth="620.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: #ffd1dc; -fx-border-width: 2; -fx-effect: dropshadow(gaussian, rgba(255, 182, 193, 0.2), 10, 0.3, 0, 4); -fx-table-cell-border-color: transparent; -fx-control-inner-background: #fefefe; -fx-control-inner-background-alt: #fff5f7;">
+                                                    <columns>
+                                                        <TableColumn fx:id="colIdHabitacion" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Id" />
+                                                        <TableColumn fx:id="colNumeroHabitacion" prefWidth="300.0" text="#Habitacion" />
+                                                        <TableColumn fx:id="colPrecioHabitacion" prefWidth="220.0" text="Precio" />
+                                                    </columns>
+                                                </TableView>
+
+                                                <!-- Botones laterales -->
+                                                <Button id="btnAgregarHabitacion" fx:id="btnAgregarHabitacion" layoutX="660.0" layoutY="120.0" mnemonicParsing="false" onAction="#agregarHabitacion" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="+ Agregar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <Button id="btnModificarHabitacion" fx:id="btnModificarHabitacion" layoutX="660.0" layoutY="175.0" mnemonicParsing="false" onAction="#modificarHabitacion" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="✏ Modificar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <Button id="btnEliminarHabitacion" fx:id="btnEliminarHabitacion" layoutX="660.0" layoutY="230.0" mnemonicParsing="false" onAction="#eliminarHabitacion" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="🗑 Eliminar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+
+                        <!-- TAB RESERVACIONES -->
+                        <Tab id="tabHabitaciones" fx:id="tabReservaciones" style="-fx-background-color: #c7f0db; -fx-background-radius: 12 12 0 0; -fx-padding: 5 12 5 12; -fx-font-size: 11px; -fx-font-weight: bold;" text="Reservaciones">
+                            <content>
+                                <AnchorPane style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 10;">
+                                    <children>
+                                        <Pane prefHeight="445.0" prefWidth="830.0">
+                                            <children>
+                                                <!-- Barra de búsqueda -->
+                                                <TextField id="txtBuscarHabitacion" fx:id="txtBuscarReservacion" layoutX="20.0" layoutY="15.0" prefHeight="35.0" prefWidth="200.0" promptText="Buscar reservación..." style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 20; -fx-text-fill: #333; -fx-prompt-text-fill: #999; -fx-padding: 0 15 0 15; -fx-font-size: 13;" />
+
+                                                <Button id="btnBuscarHabitacion" fx:id="btnBuscarReservacion" layoutX="235.0" layoutY="15.0" mnemonicParsing="false" onAction="#buscarReservacion" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #667eea; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="Buscar">
+                                                    <font>
+                                                        <Font name="System Bold" size="12.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <ProgressIndicator fx:id="progressReservaciones" layoutX="330.0" layoutY="20.0" prefHeight="25.0" prefWidth="25.0" style="-fx-progress-color: white;" visible="false" />
+
+                                                <!-- Tabla Reservaciones -->
+                                                <TableView id="tblHabitaciones" fx:id="tblReservaciones" layoutX="20.0" layoutY="65.0" prefHeight="360.0" prefWidth="620.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: #c7f0db; -fx-border-width: 2; -fx-effect: dropshadow(gaussian, rgba(144, 238, 144, 0.2), 10, 0.3, 0, 4); -fx-table-cell-border-color: transparent; -fx-control-inner-background: #fefefe; -fx-control-inner-background-alt: #f5fff9;">
+                                                    <columns>
+                                                        <TableColumn fx:id="colIdReservacion" prefWidth="80.0" style="-fx-alignment: CENTER;" text="#" />
+                                                        <TableColumn fx:id="colClienteReservacion" prefWidth="180.0" text="Cliente" />
+                                                        <TableColumn fx:id="colHabitacionReservacion" prefWidth="180.0" text="Habitacion" />
+                                                        <TableColumn fx:id="colNochesReservacion" prefWidth="180.0" text="#Noches" />
+                                                    </columns>
+                                                </TableView>
+
+                                                <!-- Botones laterales -->
+                                                <Button id="btnAgregarHabitacion" fx:id="btnAgregarHabitacion2" layoutX="660.0" layoutY="120.0" mnemonicParsing="false" onAction="#agregarReservacion" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #10b981; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="+ Agregar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <Button id="btnModificarHabitacion" fx:id="btnModificarHabitacion2" layoutX="660.0" layoutY="175.0" mnemonicParsing="false" onAction="#modificarReservacion" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="✏ Modificar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+
+                                                <Button id="btnEliminarHabitacion" fx:id="btnEliminarHabitacion2" layoutX="660.0" layoutY="230.0" mnemonicParsing="false" onAction="#eliminarReservacion" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="🗑 Eliminar">
+                                                    <font>
+                                                        <Font name="System Bold" size="13.0" />
+                                                    </font>
+                                                </Button>
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+
+                <!-- Botón Abrir Chat -->
+                <Button fx:id="btnAbrirChat" layoutX="706.0" layoutY="510.0" mnemonicParsing="false" onAction="#abrirChat" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-text-fill: #667eea; -fx-background-radius: 20; -fx-cursor: hand; -fx-font-weight: bold;" text="💬 Abrir Chat">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
     </children>
 </AnchorPane>
