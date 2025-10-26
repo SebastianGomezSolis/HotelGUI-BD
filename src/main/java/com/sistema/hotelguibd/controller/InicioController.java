@@ -509,6 +509,7 @@ public class InicioController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
             // Aqui podriamos poner un alert con un mensaje bonito :)
+
         }
     }
 
